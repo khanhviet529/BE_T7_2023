@@ -67,15 +67,6 @@
             margin-left: auto;
         }
 
-        /* .inner-body .inner-second {
-            display: flex;
-            justify-content: flex-end;
-        } */
-
-        /* .inner-body .inner-second {
-            margin-left: auto;
-        } */
-
         .chat .inner-foot {
             border-top: 1px solid blue;
             padding: 10px;
@@ -98,6 +89,80 @@
             height: 25px;
             cursor: pointer;
             padding: 0 10px;
+        }
+
+        .images .item {
+            border: 1px solid green;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            display: inline-block;
+            width: 200px;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .images .item img {
+            height: 100px;
+            width: auto;
+        }
+
+        .images .item .tittle {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .list {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .list .inner-item {
+            display: inline-block;
+            border: 3px solid green;
+            width: 250px;
+            padding: 5px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .list .inner-image img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 1/1;
+        }
+
+        .list .inner-item .inner-content {
+            padding: 10px 5px;
+        }
+
+        .list .inner-item .inner-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .list .inner-item .inner-price-new {
+            font-size: 18px;
+            font-weight: 700;
+            color: green;
+            margin-bottom: 5px;
+        }
+
+        .list .inner-item .inner-price-old {
+            font-size: 16px;
+            font-weight: 500;
+            color: red;
+            margin-bottom: 5px;
+            text-decoration: line-through;
+        }
+
+        .list .inner-item .inner-percent {
+            font-size: 18px;
+            font-weight: 700;
+            color: purple;
         }
     </style>
     <h2>Câu 1: Box chat</h2>
@@ -141,6 +206,142 @@
                     <i class="fa-solid fa-paper-plane"></i>
                 </button>
             </form>
+        </div>
+    </div>
+    <h2>Câu 2: Danh mục sản phẩm</h2>
+    <p><strong>Yêu cầu</strong>: Sử dụng HTML và CSS để code box chat sau.</p>
+    <div class="images">
+        <div class="item">
+            <img src="Images/ao.png" alt="">
+            <div class="tittle">Thời Trang Nam</div>
+        </div>
+        <div class="item">
+            <img src="Images/dien-thoai.png" alt="">
+            <div class="tittle">Điện Thoại & Phụ Kiện</div>
+        </div>
+        <div class="item">
+            <img src="Images/dong-ho.png" alt="">
+            <div class="tittle">Đồng Hồ</div>
+        </div>
+        <div class="item">
+            <img src="Images/giay.png" alt="">
+            <div class="tittle">Giày</div>
+        </div>
+        <div class="item">
+            <img src="Images/may-anh.png" alt="">
+            <div class="tittle">Máy Ảnh</div>
+        </div>
+        <div class="item">
+            <img src="Images/may-tinh.png" alt="">
+            <div class="tittle">Máy Tính</div>
+        </div>
+        <div class="item">
+            <img src="Images/me-va-be (1).png" alt="">
+            <div class="tittle">Mẹ & Bé</div>
+        </div>
+        <div class="item">
+            <img src="Images/my-pham.png" alt="">
+            <div class="tittle">Sắc Đẹp</div>
+        </div>
+        <div class="item">
+            <img src="Images/noi.png" alt="">
+            <div class="tittle">Nhà Cửa & Đời Sống</div>
+        </div>
+        <div class="item">
+            <img src="Images/tui.png" alt="">
+            <div class="tittle">Túi Ví Nữ</div>
+        </div>
+    </div>
+    <h2>Câu 3: Danh sách sản phẩm</h2>
+    <p><strong>Yêu cầu</strong>: Sử dụng HTML và CSS để code box chat sau.</p>
+    <div class="list">
+        <div class="inner-item">
+            <div class="inner-image">
+                <img src="images_2/pro-1.jpg" alt="">
+            </div>
+            <div class="inner-content">
+                <div class="inner-tittle">iPhone 9</div>
+                <div class="inner-price-new">120.000đ</div>
+                <div class="inner-price-old"><del>90.000đ</del></div>
+                <div class="inner-percent">-30%</div>
+            </div>
+        </div>
+        <div class="inner-item">
+            <div class="inner-image">
+                <img src="images_2/pro-2.jpg" alt="">
+            </div>
+            <div class="inner-content">
+                <div class="inner-tittle">iPhone X</div>
+                <div class="inner-price-new">120.000đ</div>
+                <div class="inner-price-old"><del>90.000đ</del></div>
+                <div class="inner-percent">-30%</div>
+            </div>
+        </div>
+        <div class="inner-item">
+            <div class="inner-image">
+                <img src="images_2/pro-3.jpg" alt="">
+            </div>
+            <div class="inner-content">
+                <div class="inner-tittle">Samsung Universe 9</div>
+                <div class="inner-price-new">120.000đ</div>
+                <div class="inner-price-old"><del>90.000đ</del></div>
+                <div class="inner-percent">-30%</div>
+            </div>
+        </div>
+        <div class="inner-item">
+            <div class="inner-image">
+                <img src="images_2/pro-4.jpg" alt="">
+            </div>
+            <div class="inner-content">
+                <div class="inner-tittle">OPPOF19</div>
+                <div class="inner-price-new">120.000đ</div>
+                <div class="inner-price-old"><del>90.000đ</del></div>
+                <div class="inner-percent">-30%</div>
+            </div>
+        </div>
+        <div class="inner-item">
+            <div class="inner-image">
+                <img src="images_2/pro-5.jpg" alt="">
+            </div>
+            <div class="inner-content">
+                <div class="inner-tittle">Huawei P30</div>
+                <div class="inner-price-new">120.000đ</div>
+                <div class="inner-price-old"><del>90.000đ</del></div>
+                <div class="inner-percent">-30%</div>
+            </div>
+        </div>
+        <div class="inner-item">
+            <div class="inner-image">
+                <img src="images_2/pro-6.png" alt="">
+            </div>
+            <div class="inner-content">
+                <div class="inner-tittle">MacBook Pro</div>
+                <div class="inner-price-new">120.000đ</div>
+                <div class="inner-price-old"><del>90.000đ</del></div>
+                <div class="inner-percent">-30%</div>
+            </div>
+        </div>
+        <div class="inner-item">
+            <div class="inner-image">
+                <img src="images_2/pro-7.jpg" alt="">
+            </div>
+            <div class="inner-content">
+                <div class="inner-tittle">Samsung Galaxy Book</div>
+                <div class="inner-price-new">120.000đ</div>
+                <div class="inner-price-old"><del>90.000đ</del></div>
+                <div class="inner-percent">-30%</div>
+            </div>
+        </div>
+        <div class="inner-item">
+            <div class="inner-image">
+                <img src="images_2/pro-8.jpg" alt="">
+            </div>
+            <div class="inner-content">
+                <div class="inner-tittle">Microsoft Surface Laptop 4</div>
+                <div class="inner-price-new">120.000đ</div>
+                <div class="inner-price-old"><del>90.000đ</del></div>
+                <div class="inner-percent">-30%</div>
+            </div>
         </div>
     </div>
 </body>
