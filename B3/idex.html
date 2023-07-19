@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập 03</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .chat {
+            width: 280px;
+            border: 1px solid blue;
+            border-radius: 8px;
+        }
+
+        .chat .inner-head {
+            padding: 10px;
+            border-bottom: 1px solid blue;
+        }
+
+        .chat .inner-head .inner-avatar {
+            background-color: #FE5DA3;
+            width: 32px;
+            height: 32px;
+            display: inline-block;
+            border-radius: 50%;
+            font-size: 13px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            line-height: 32px;
+        }
+
+        .chat .inner-head .inner-name {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: bold;
+            color: black;
+            margin-left: 5px;
+        }
+
+        .inner-body {
+            padding: 10px;
+        }
+
+        .inner-body .inner-content {
+            background-color: #F1F1F1;
+            margin-bottom: 10px;
+            width: 200px;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 13px;
+        }
+
+        .inner-body .inner-second .inner-content {
+            color: white;
+            background-color: #FE5DA3;
+            margin-left: auto;
+        }
+
+        /* .inner-body .inner-second {
+            display: flex;
+            justify-content: flex-end;
+        } */
+
+        /* .inner-body .inner-second {
+            margin-left: auto;
+        } */
+
+        .chat .inner-foot {
+            border-top: 1px solid blue;
+            padding: 10px;
+        }
+
+        .chat .inner-form input {
+            width: 190px;
+            height: 25px;
+            border-radius: 15px;
+            border: 1px solid blue;
+            padding: 0 10px;
+            outline: none;
+        }
+
+        .chat .inner-form button {
+            border-radius: 15px;
+            border: 1px solid #FE5DA3;
+            background-color: #FE5DA3;
+            color: white;
+            height: 25px;
+            cursor: pointer;
+            padding: 0 10px;
+        }
+    </style>
+    <h2>Câu 1: Box chat</h2>
+    <p><strong>Yêu cầu</strong>: Sử dụng HTML và CSS để code box chat sau.</p>
+    <div class="chat">
+        <div class="inner-head">
+            <div class="inner-avatar">EY</div>
+            <div class="inner-name">Em Yêu</div>
+        </div>
+        <div class="inner-body">
+            <div class="inner-first">
+                <div class="inner-content">
+                    A ơi sang nhà e nha, nhà e không có ai ở nhà cả
+                </div>
+            </div>
+            <div class="inner-second">
+                <div class="inner-content">
+                    Thế à? Ok e iu
+                </div>
+            </div>
+            <div class="inner-first">
+                <div class="inner-content">
+                    Nhanh nha nhanh nha
+                </div>
+            </div>
+            <div class="inner-second">
+                <div class="inner-content">
+                    Ck đến rồi mà thấy ai ở nhà đâu e? Khóa cửa mà :(
+                </div>
+            </div>
+            <div class="inner-first">
+                <div class="inner-content">
+                    Thì em bảo nhà e không ai ở nhà mà :))
+                </div>
+            </div>
+        </div>
+        <div class="inner-foot">
+            <form class="inner-form">
+                <input type="text" placeholder="Nhập nội dung...">
+                <button>
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
