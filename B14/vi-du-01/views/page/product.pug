@@ -1,0 +1,9 @@
+extends ../layouts/default.pug
+include ../mixin/box-head.pug
+
+block Main 
+    +box-head(title,"Đây là mô tả trang Danh sách sản phẩm")
+
+    ul 
+        each item in products 
+            li #{item.title} - #{item.price}$

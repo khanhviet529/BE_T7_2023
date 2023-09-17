@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+}
+
+.todo-list {
+  text-align: center;
+  display: block;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.todo-list__list-item {
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.todo-list__item {
+  width: 100%;
+  height: auto;
+  word-wrap: break-word;
+  margin-bottom: 20px;
+}
+
+.active {
+  background-color: aqua;
+  font-style: italic;
+  color: red;
+}
+
+/*# sourceMappingURL=style.css.map */

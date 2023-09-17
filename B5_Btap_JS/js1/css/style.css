@@ -1,0 +1,16 @@
+.article {
+  border: 2px solid red;
+  padding: 10px;
+}
+.article__image {
+  width: 300px;
+  height: 300px;
+  aspect-ratio: 1/1;
+}
+.article__image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/*# sourceMappingURL=style.css.map */
