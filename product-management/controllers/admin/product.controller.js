@@ -62,7 +62,6 @@ module.exports.changeStatus = async (req, res) => {
 }
 
 // [Path] /admin/products/change-multi
-
 module.exports.changeMulti = async (req, res) => {
   try {
     const ids = req.body.ids.split(", ");
@@ -103,7 +102,6 @@ module.exports.changeMulti = async (req, res) => {
 }
 
 // [Path] /admin/products/delete/:id
-
 module.exports.delete = async (req, res) => {
   const id = req.params.id;
   try {
@@ -120,7 +118,9 @@ module.exports.delete = async (req, res) => {
 
 // [Get] /admin/products/create
 module.exports.create = (req, res) => {
-  res.render("admin/pages/products/create");
+  res.render("admin/pages/products/create", {
+    title: "Trang tạo sản phẩm"
+  });
 }
 
 // [POST] /admin/products/create
@@ -152,14 +152,23 @@ module.exports.createPost = async (req, res) => {
 module.exports.edit = async (req, res) => {
   try {
     const find = {
+      deleted: false,
       _id: req.params.id
     }
     const product = await Product.find(find);
-    res.render("admin/pages/products/edit", {
-      product: product[0]
-    });
+    if (product.length > 0) {
+      res.render("admin/pages/products/edit", {
+        title: "Trang chỉnh sửa sản phẩm",
+        product: product[0]
+      });
+    }
+    else {
+      res.flash("error", "Sản phẩm không tồn tại");
+      res.redirect(`${system.prefixAdmin}/products`);
+    }
   } catch (error) {
     req.flash("error", "Đến trang chỉnh sửa thất bại");
+    res.redirect(`${system.prefixAdmin}/products`);
   }
 }
 
@@ -178,5 +187,29 @@ module.exports.editPatch = async (req, res) => {
     req.flash('error', "Cập nhật thất bại");
   }
   res.redirect(`back`);
+}
+
+// [GET] /admin/products/detail/:id
+module.exports.detail = async (req, res) => {
+  try {
+    const find = {
+      deleted: false,
+      _id: req.params.id
+    }
+    const product = await Product.find(find);
+    if (product.length > 0) {
+      res.render("admin/pages/products/detail", {
+        title: "Trang chi tiết sản phẩm",
+        product: product[0]
+      });
+    }
+    else {
+      res.flash("error", "Sản phẩm không tồn tại");
+      res.redirect(`${system.prefixAdmin}/products`);
+    }
+  } catch (error) {
+    req.flash("error", "Đến trang chi tiết sản phẩm thất bại");
+    res.redirect(`${system.prefixAdmin}/products`);
+  }
 }
 
