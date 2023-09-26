@@ -1,5 +1,5 @@
-//Show Alert
-const showAlert = document.querySelector("[show-alert]");
+// show Alert
+let showAlert = document.querySelector("[show-alert]");
 if (showAlert) {
   const time = parseInt(showAlert.getAttribute("data-time"));
   const closeAlert = document.querySelector("[close-alert]");

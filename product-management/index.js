@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 var bodyParser = require('body-parser')
 const methodOverride = require("method-override");
 const flash = require("express-flash");
@@ -7,6 +8,12 @@ const session = require("express-session");
 require("dotenv").config();
 
 const app = express();
+
+// TinyMCE
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
+
+// End TinyMCE
+
 
 // Connect MongoDB
 const database = require("./config/database");

@@ -4,14 +4,18 @@ include ../../mixins/search.pug
 include ../../mixins/pagination.pug
 include ../../mixins/form-change-multi.pug
 include ../../mixins/alert.pug
+include ../../mixins/sort.pug
 
 block main
 
+  //- Thông báo
   +alert-success("5000")
   +alert-error("5000")
+  //- End Thông báo
 
   h1 Danh sách sản phẩm
 
+  //- Bộ lọc tìm kiếm
   .card.mb-3
     .card-header Bộ lọc và Tìm kiếm
     .card-body
@@ -20,7 +24,18 @@ block main
           +filter-status(filterStatus)
         .col-6
           +search(keyword)
+  //- End Bộ lọc tìm kiếm
 
+  //- Sắp xếp
+  .card.mb-3
+  .card-header Sắp xếp
+  .card-body
+    .row
+      .col-4
+        +sort()
+  //- End sort
+
+  //- Hiển thị sản phẩm
   .card.mb-3
     .card-header(style=(quantityPage > 0 ? "" : "text-align:center")) Danh sách
       if(quantityPage > 0)
@@ -55,7 +70,7 @@ block main
                       name="id"
                       value=item.id
                     )
-                  td #{index + 1}
+                  td #{currentIndex + index}
                   td
                     img(
                       src=item.thumbnail
@@ -107,8 +122,13 @@ block main
       else 
         h1(style="color: red") Không tìm thấy sản phẩm nào   
 
-  +pagination(quantityPage,currentPage,limitButtons,currentTotalPages,totalPages)
+  //- End Hiển thị sản phẩm
 
+  //- Phân Trang
+  +pagination(quantityPage,currentPage,limitButtons,currentTotalPages,totalPages)
+  //- End Phân trang
+
+  //- Form ảo gửi data
   form(
     action=""
     method="POST"
@@ -120,6 +140,7 @@ block main
     method="POST"
     id="form-delete"
     data-path=`${prefixAdmin}/products/delete/`
-  ) 
+  )
+  //- End form ảo gửi data 
 
   script(src="/admin/js/product.js")

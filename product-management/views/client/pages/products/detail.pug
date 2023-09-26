@@ -48,6 +48,4 @@ block main
         if (product.description)
           div.mb-4
             h4(class="font-weight-bold") Mô tả sản phẩm:
-            p #{product.description}
-
-  script(src="/client/js/script.js")
+            p !{product.description}

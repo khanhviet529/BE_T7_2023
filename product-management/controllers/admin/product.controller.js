@@ -9,6 +9,7 @@ const system = require("../../config/system");
 module.exports.index = async (req, res) => {
   // console.log(req.query.status);
 
+  // Find
   var find = {
     deleted: false
   };
@@ -22,14 +23,28 @@ module.exports.index = async (req, res) => {
   if (objectSearch.title) {
     find.title = objectSearch.title;
   }
+  // End find
+
   // Pagination
   var objectPagination = await pagination(req.query, find, limitPages.limitProducts, limitPages.limitButtons);
   // End Pagination
+
+  // Sort
+  var sort = {};
+  if (req.query.sortKey && req.query.sortValue) {
+    sort[req.query.sortKey] = req.query.sortValue;
+  }
+  else {
+    sort.position = "desc";
+  }
+  // End Sort
+
+
   try {
     var products = await Product.find(find).
       limit(objectPagination.limitProducts).
       skip(objectPagination.skip).
-      sort({ position: "desc" });
+      sort(sort);
   } catch (error) {
     console.error("Lỗi truy vấn dữ liệu trang /admin/products");
   }
@@ -43,7 +58,8 @@ module.exports.index = async (req, res) => {
     currentPage: objectPagination.currentPage,
     limitButtons: limitPages.limitButtons,
     totalPages: objectPagination.totalPages,
-    currentTotalPages: objectPagination.currentTotalPages
+    currentTotalPages: objectPagination.currentTotalPages,
+    currentIndex: objectPagination.skip + 1
   });
 }
 
@@ -130,13 +146,12 @@ module.exports.createPost = async (req, res) => {
     req.body.discountPercentage = parseInt(req.body.discountPercentage);
     req.stock = parseInt(req.body.stock);
     if (req.body.position == "") {
-      const countProducts = await Product.count() + 1;
+      const countProducts = await Product.count();
       req.body.position = countProducts + 1;
     }
     else {
-      req.body.position = parseInt(countProducts + 1);
+      req.body.position = parseInt(req.body.position);
     }
-    if (req.file) req.body.thumbnail = `/uploads/${req.file.filename}`;
 
     const product = new Product(req.body);
     await product.save();
@@ -172,14 +187,12 @@ module.exports.edit = async (req, res) => {
   }
 }
 
-// [POST] /admin/products/edit/:id
+// [PATCH] /admin/products/edit/:id
 module.exports.editPatch = async (req, res) => {
   try {
     req.body.price = parseInt(req.body.price);
     req.body.discountPercentage = parseInt(req.body.discountPercentage);
     req.stock = parseInt(req.body.stock);
-    if (req.file) req.body.thumbnail = `/uploads/${req.file.filename}`;
-    else if (req.query.isData != "true") req.body.thumbnail = null;
     await Product.updateOne({ _id: req.params.id }, req.body);
     req.flash('success', "Bạn đã cập nhật sản phẩm thành công !");
   }

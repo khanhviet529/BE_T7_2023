@@ -34,6 +34,7 @@ module.exports.detail = async (req, res) => {
 		});
 
 		if (product) {
+			req.flash("success", "Chi tiết sản phẩm")
 			res.render("client/pages/products/detail", {
 				title: "Chi tiết sản phẩm",
 				product: product

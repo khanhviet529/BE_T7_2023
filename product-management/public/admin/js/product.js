@@ -186,18 +186,69 @@ if (uploadImage) {
 
 const formEditProduct = document.querySelector("[form-edit-product]");
 if (formEditProduct) {
+    const uploadImageInput = formEditProduct.querySelector("[upload-image-input]");
     let uploadImagePreview = formEditProduct.querySelector("[upload-image-preview]");
     if (uploadImagePreview) {
         formEditProduct.addEventListener("submit", (e) => {
             e.preventDefault();
             const src = uploadImagePreview.getAttribute('src');
+            let url = new URL(formEditProduct.action);
+            url.searchParams.set("name", uploadImageInput.name);
             if (src != "") {
-                formEditProduct.action += "&isData=true";
+                url.searchParams.set("isData", "true");
             }
-            console.log(formEditProduct.action);
+            formEditProduct.action = url;
             formEditProduct.submit();
         })
     }
 }
 // End Edit product
 
+
+// Sort
+
+const sort = document.querySelector("[sort]");
+if (sort) {
+    let url = new URL(window.location.href);
+
+    const sortSelect = sort.querySelector("[sort-select]");
+    const sortClear = sort.querySelector("[sort-clear]");
+
+    // Select
+    sortSelect.addEventListener("change", (e) => {
+        let value = e.target.value.split("-");
+        url.searchParams.set("sortKey", value[0]);
+        url.searchParams.set("sortValue", value[1]);
+        window.location.href = url.href;
+    });
+    // End Select
+
+    // Clear
+    sortClear.addEventListener("click", (e) => {
+        url.searchParams.delete("sortKey");
+        url.searchParams.delete("sortValue");
+        window.location.href = url.href;
+    })
+    // End clear
+
+    // Thêm selected
+
+    const sortKey = url.searchParams.get("sortKey");
+    const sortValue = url.searchParams.get("sortValue");
+    let Default;
+    if (sortKey && sortValue) {
+        Default = sortSelect.querySelector(`option[value='${sortKey}-${sortValue}']`);
+    }
+    else {
+        Default = sortSelect.querySelector("option[disabled]");
+    }
+    Default.selected = true;
+
+    // End Thêm selected
+
+
+
+
+}
+
+// End Sort
