@@ -1,5 +1,7 @@
 const Product = require("../../models/product.model");
-
+const ProductCategory = require("../../models/product-category.model");
+const productsHelper = require("../../helper/products");
+const productsCategoryHelper = require("../../helper/products-category");
 // [GET] /products
 module.exports.index = async (req, res) => {
 	try {
@@ -8,10 +10,7 @@ module.exports.index = async (req, res) => {
 			deleted: false
 		}).sort({ position: "desc" });
 
-		const newProducts = products.map(item => {
-			item.priceNew = (item.price * (100 - item.discountPercentage) / 100).toFixed(0);
-			return item;
-		});
+		const newProducts = productsHelper.priceNewProducts(products);
 
 		res.render("client/pages/products/index", {
 			pageTitle: "Danh sách sản phẩm",
@@ -23,29 +22,60 @@ module.exports.index = async (req, res) => {
 	}
 }
 
-// [GET] /products/:slug
-
+// [GET] /products/:slugProduct
 module.exports.detail = async (req, res) => {
 	try {
-		const product = await Product.findOne({
-			status: "active",
+		const find = {
 			deleted: false,
-			slug: req.params.slug
-		});
+			slug: req.params.slug,
+			slug: req.params.slugProduct,
+			status: "active"
+		};
 
-		if (product) {
-			req.flash("success", "Chi tiết sản phẩm")
-			res.render("client/pages/products/detail", {
-				title: "Chi tiết sản phẩm",
-				product: product
+		const product = await Product.findOne(find);
+
+		if (product.product_category_id) {
+			const category = await ProductCategory.findOne({
+				_id: product.product_category_id,
+				status: "active",
+				deleted: false
 			});
+
+			product.category = category;
 		}
-		else {
-			req.flash("error", "Sản phẩm không tồn tại");
-			res.redirect("/products");
-		}
+
+		product.priceNew = productsHelper.priceNewProduct(product);
+
+		res.render("client/pages/products/detail", {
+			title: product.title,
+			product: product
+		});
 	} catch (error) {
-		req.flash("error", "Chuyển hướng thất bại");
-		res.redirect("/products");
+		res.redirect(`/products`);
 	}
-}
+};
+
+// [GET] /products/:slugCategory
+module.exports.category = async (req, res) => {
+	const category = await ProductCategory.findOne({
+		slug: req.params.slugCategory,
+		status: "active",
+		deleted: false
+	});
+
+	const listSubCategory = await productsCategoryHelper.getSubCategory(category.id);
+
+	const listSubCategoryId = listSubCategory.map(item => item.id);
+
+	const products = await Product.find({
+		product_category_id: { $in: [category.id, ...listSubCategoryId] },
+		deleted: false
+	}).sort({ position: "desc" });
+
+	const newProducts = productsHelper.priceNewProducts(products);
+
+	res.render("client/pages/products/index", {
+		topitle: category.title,
+		products: newProducts,
+	});
+};

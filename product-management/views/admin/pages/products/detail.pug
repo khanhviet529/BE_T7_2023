@@ -1,50 +1,51 @@
 extends ../../layouts/default.pug
 
 block main
-  .container
-    .row
-      .col-md-6
-        if (product.thumbnail)
-          img.img-fluid(src=product.thumbnail, alt="Ảnh sản phẩm")
+  if(role.permissions.includes("products_detail"))
+    .container
+      .row
+        .col-md-6
+          if (product.thumbnail)
+            img.img-fluid(src=product.thumbnail, alt="Ảnh sản phẩm")
 
-      .col-md-6
-        if (product.title)
-          h1.display-4.mb-4 #{product.title}
+        .col-md-6
+          if (product.title)
+            h1.display-4.mb-4 #{product.title}
 
-        if (product.price)
-          div.mb-4
-            span(class="font-weight-bold") Giá:
-            span.text-danger.ml-2 #{product.price}$
+          if (product.price)
+            div.mb-4
+              span(class="font-weight-bold") Giá:
+              span.text-danger.ml-2 #{product.price}$
 
-        if (product.discountPercentage)
-          div.mb-4
-            span(class="font-weight-bold") Giảm giá:
-            span.ml-2 #{product.discountPercentage}%
+          if (product.discountPercentage)
+            div.mb-4
+              span(class="font-weight-bold") Giảm giá:
+              span.ml-2 #{product.discountPercentage}%
 
-        if (product.stock)
-          div.mb-4
-            span(class="font-weight-bold") Còn lại:
-            span.ml-2 #{product.stock}
+          if (product.stock)
+            div.mb-4
+              span(class="font-weight-bold") Còn lại:
+              span.ml-2 #{product.stock}
 
-        if (product.status)
-          - var statusClass = product.status === "active" ? "badge-success" : "badge-danger"
-          div.mb-4
-            span(class="font-weight-bold") Trạng thái:
-            span.ml-2
-              span(class="badge " + statusClass) #{product.status === "active" ? 'Hoạt động' : 'Dừng hoạt động'}
+          if (product.status)
+            - var statusClass = product.status === "active" ? "badge-success" : "badge-danger"
+            div.mb-4
+              span(class="font-weight-bold") Trạng thái:
+              span.ml-2
+                span(class="badge " + statusClass) #{product.status === "active" ? 'Hoạt động' : 'Dừng hoạt động'}
 
-        if (product.position)
-          div.mb-4
-            span(class="font-weight-bold") Vị trí:
-            span.ml-2 #{product.position}
+          if (product.position)
+            div.mb-4
+              span(class="font-weight-bold") Vị trí:
+              span.ml-2 #{product.position}
 
-        if (product.description)
-          div.mb-4
-            h4(class="font-weight-bold") Mô tả sản phẩm:
-            p !{product.description}
+          if (product.description)
+            div.mb-4
+              h4(class="font-weight-bold") Mô tả sản phẩm:
+              p !{product.description}
 
-        a.btn.btn-warning(
-          href=`${prefixAdmin}/products/edit/${product.id}`
-        ) Chỉnh sửa
+          a.btn.btn-warning(
+            href=`${prefixAdmin}/products/edit/${product.id}`
+          ) Chỉnh sửa
 
-  script(src="/admin/js/product.js")
+    script(src="/admin/js/product.js")

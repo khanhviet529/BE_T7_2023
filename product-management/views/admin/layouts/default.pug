@@ -7,20 +7,22 @@ html(lang="en")
     link(rel="stylesheet" href="/admin/css/style.css")
     title #{title}
   body 
+    if(role.permissions.length > 0)
+      include ../partials/header.pug
 
-    include ../partials/header.pug
+      .body
+        include ../partials/sider.pug
 
-    .body
-      include ../partials/sider.pug
-
-      .main 
-        block main
+        .main 
+          block main
 
 
-    script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js") 
-    script(src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js") 
-    //- TinyMCE
-    script(src="/tinymce/tinymce.min.js")
-    script(src="/admin/js/tinymce-config.js")
-    //- End TinyMCE
-    script(src="/admin/js/script.js")
+      script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js") 
+      script(src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js") 
+      //- TinyMCE
+      script(src="/tinymce/tinymce.min.js")
+      script(src="/admin/js/tinymce-config.js")
+      //- End TinyMCE
+      script(src="/admin/js/script.js")
+    else
+      h1 Bạn không có quyền truy cập
