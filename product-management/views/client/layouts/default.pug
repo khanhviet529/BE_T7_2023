@@ -7,6 +7,11 @@ html(lang="en")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css")
     link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css")
+    //- file-upload-with-preview
+    link(rel="stylesheet" href="https://unpkg.com/file-upload-with-preview/dist/style.css")
+    //- viewerjs
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.css")
+
     link(rel="stylesheet" href="/client/css/style.css")
     title #{title}
   body 
@@ -27,5 +32,14 @@ html(lang="en")
     //- emoji-picker-element
     script(type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js") 
     //- End emoji-picker-element
-    script(type="module" src="/client/js/chat.js")
-    script(src="/client/js/script.js") 
+
+      //- file-upload-with-preview
+    script(src="https://unpkg.com/file-upload-with-preview/dist/file-upload-with-preview.iife.js")
+    //- viewerjs
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.js") 
+
+
+    //- script(type="module" src="/client/js/chat.js")
+    script(src="/client/js/script.js")
+
+    block script  

@@ -1,43 +1,18 @@
 const Chat = require("../../models/chat.model");
 const User = require("../../models/user.model");
 
-// [GET] /chat/
+const chatSocket = require("../../sockets/client/chat.socket");
+
+// [GET] /chat/:roomChatId
 module.exports.index = async (req, res) => {
-  const userId = res.locals.user.id;
-  const fullName = res.locals.user.fullName;
-
+  const roomChatId = req.params.roomChatId;
   // SocketIO
-  _io.once('connection', (socket) => {
-    socket.on("CLIENT_SEND_MESSAGE", async (content) => {
-      // Lưu vào database
-      const chat = new Chat({
-        user_id: userId,
-        content: content
-      });
-      await chat.save();
-
-      // Trả data về client
-      await _io.emit("SERVER_RETURN_MESSAGE", {
-        userId: userId,
-        fullName: fullName,
-        content: content
-      });
-    });
-
-    // Typing
-    socket.on("CLIENT_SEND_TYPING", async (type) => {
-      socket.broadcast.emit("SERVER_RETURN_TYPING", {
-        userId: userId,
-        fullName: fullName,
-        type: type
-      });
-    });
-    // End Typing
-  });
+  chatSocket(req, res);
   // End SocketIO
 
   // Lấy data từ database
   const chats = await Chat.find({
+    room_chat_id: roomChatId,
     deleted: false
   });
 
@@ -49,7 +24,7 @@ module.exports.index = async (req, res) => {
     chat.infoUser = infoUser;
   }
 
-  console.log(chats);
+  // console.log(chats);
   // Hết Lấy data từ database
 
   res.render("client/pages/chat/index", {
